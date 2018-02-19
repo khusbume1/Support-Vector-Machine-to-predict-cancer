@@ -1,0 +1,19 @@
+colonData <- read.table("D:/colon.csv",header=TRUE,sep=",")
+library(e1071)
+library(MASS)
+
+myvars <- c("T62947", "H64807", "Class")
+ndata <- colonData[myvars]
+
+ndata$Class <- factor(ndata$Class)
+
+train <- ndata
+test <- ndata
+tune <- tune.svm(Class~., data=train, gamma=10^(-6:-1), cost=10^(1:4))
+summary(tune)
+svm_model <- svm(Class~., data=train, method="C-classification", kernel="radial", probability=T,
+                 gamma=0.1, cost=10)
+
+prediction <-predict(svm_model, test, probability=T)
+table(test$Class, prediction)
+plot(svm_model, ndata)
