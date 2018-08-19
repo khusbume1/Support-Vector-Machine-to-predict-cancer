@@ -1,4 +1,4 @@
-# Support-Vector-Machine-to-predict-cancer
+# Support-Vector-Machine-to-classify-cancer-data
 
 Implementation of support vector machine model to classify and predict cancer using colon data set
 
